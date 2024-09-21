@@ -1,0 +1,73 @@
+@startuml
+class Main {
+}
+interface Main$Sensor {
+~ void agregarObservador(Operador)
+~ void eliminarObservador(Operador)
+~ void notificarObservadores(String)
+~ void setMedicion(double)
+}
+
+abstract class Main$SensorBase {
+- List<Operador> observadores
+# double valorMinimo
+# double valorMaximo
+# double medicionActual
+# String tipo
++ void agregarObservador(Operador)
++ void eliminarObservador(Operador)
++ void notificarObservadores(String)
++ void setMedicion(double)
+}
+
+
+class Main$SensorTemperatura {
+}
+class Main$SensorPresion {
+}
+class Main$SensorHumedad {
+}
+class Main$SensorCombustible {
+}
+interface Main$Operador {
+~ void actualizar(Sensor,String)
+}
+
+class Main$OperadorSeguridad {
++ void actualizar(Sensor,String)
+}
+
+class Main$OperadorMantenimiento {
++ void actualizar(Sensor,String)
+}
+
+class Main$OperadorGerencia {
++ void actualizar(Sensor,String)
+}
+
+class Main$SistemaMonitoreo {
++ {static} void main(String[])
+}
+
+
+
+Main +.. Main$Sensor
+Main +.. Main$SensorBase
+Sensor <|.. Main$SensorBase
+Main +.. Main$SensorTemperatura
+SensorBase <|-- Main$SensorTemperatura
+Main +.. Main$SensorPresion
+SensorBase <|-- Main$SensorPresion
+Main +.. Main$SensorHumedad
+SensorBase <|-- Main$SensorHumedad
+Main +.. Main$SensorCombustible
+SensorBase <|-- Main$SensorCombustible
+Main +.. Main$Operador
+Main +.. Main$OperadorSeguridad
+Operador <|.. Main$OperadorSeguridad
+Main +.. Main$OperadorMantenimiento
+Operador <|.. Main$OperadorMantenimiento
+Main +.. Main$OperadorGerencia
+Operador <|.. Main$OperadorGerencia
+Main +.. Main$SistemaMonitoreo
+@enduml
